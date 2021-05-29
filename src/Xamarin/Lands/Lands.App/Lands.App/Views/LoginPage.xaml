@@ -1,74 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Lands.App.Views.LoginPage"
-             Background="Gray"
-             Visual="Material">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Lands.App.Views.LoginPage"
+    BindingContext="{Binding MainViewModel, Source={StaticResource Locator}}"
+    Title="CarlosViloria.Me - Login"
+    Background="Gray"
+    Visual="Material">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView
+            BindingContext="{Binding LoginViewModel}">
             <StackLayout 
-            Padding="20" 
-            VerticalOptions="StartAndExpand">
-                <Label 
-                Text="Lands CVM - Login" 
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" 
-                FontSize="Large"
-                FontAttributes="Bold"/>
+                Padding="20" 
+                VerticalOptions="StartAndExpand">
+                <!--<Label 
+                    Text="Lands CVM - Login" 
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="CenterAndExpand" 
+                    FontSize="Large"
+                    FontAttributes="Bold"/>-->
                 <Image 
-                Source="earthglobal" 
-                WidthRequest="150"/>
+                    Source="earthglobal" 
+                    WidthRequest="150"/>
                 <Frame BackgroundColor="White">
                     <StackLayout>
-                        <Label Text="Username or Email" />
+                        <Label 
+                            Text="Username or Email" />
                         <Entry 
-                        Placeholder="username or e-mail" 
-                        Keyboard="Email" />
-                        <Label Text="Password" />
+                            Placeholder="Enter your username or e-mail..." 
+                            Keyboard="Email"
+                            FontSize="Small"
+                            Text="{Binding Email, Mode=TwoWay}"/>
+                        <Label 
+                            Text="Password" />
                         <Entry 
-                        IsPassword="True" 
-                        Placeholder="password"/>
-                        <ActivityIndicator></ActivityIndicator>
-                        <Button 
-                        Text="Login"
-                        BorderRadius="23"/>
-                        <StackLayout Orientation="Horizontal">
+                            IsPassword="True" 
+                            Placeholder="Enter your password..."
+                            FontSize="Small"
+                            Text="{Binding Password, Mode=TwoWay}"/>
+                        <ActivityIndicator
+                            VerticalOptions="CenterAndExpand"
+                            IsRunning="{Binding IsRunning, Mode=TwoWay}">
+                        </ActivityIndicator>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
                             <Label
-                            Text="Remember me on this device"
-                            VerticalOptions="Center"
-                            HorizontalOptions="StartAndExpand"/>
+                                Text="Remember me on this device"
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand"/>
                             <Switch 
-                            HorizontalOptions="End" />
+                                HorizontalOptions="End" 
+                                IsToggled="{Binding IsRemembered, Mode=TwoWay}"/>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal">
+                        <Button 
+                            Text="Login"
+                            BorderRadius="23"
+                            Command="{Binding LoginCommand}"
+                            IsEnabled="{Binding IsEnabled, Mode=TwoWay}"/>
+                        <StackLayout 
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
                             <Label 
-                            Text="Register" 
-                            TextColor="Blue"
-                            HorizontalOptions="StartAndExpand"/>
+                                Text="Register" 
+                                TextColor="Blue"
+                                HorizontalOptions="StartAndExpand"/>
                             <Label 
-                            Text="Forgot password?" 
-                            TextColor="Blue"
-                            HorizontalOptions="End"/>
+                                Text="Forgot password?" 
+                                TextColor="Blue"
+                                HorizontalOptions="End"/>
                         </StackLayout>
                         <StackLayout 
-                        Orientation="Horizontal"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Center">
+                            Orientation="Horizontal"
+                            VerticalOptions="EndAndExpand"
+                            HorizontalOptions="Center">
                             <Image 
-                            Source="facebook" 
-                            WidthRequest="39"/>
+                                Source="facebook" 
+                                WidthRequest="39"/>
                             <Label Text="  " />
                             <Image 
-                            Source="twitter"
-                            WidthRequest="36"/>
+                                Source="twitter"
+                                WidthRequest="36"/>
                             <Label Text="  " />
                             <Image 
-                            Source="gmail"
-                            WidthRequest="43"/>
+                                Source="gmail"
+                                WidthRequest="43"/>
                             <Label Text="  " />
                             <Image 
-                            Source="linkedin"
-                            WidthRequest="35"/>
+                                Source="linkedin"
+                                WidthRequest="35"/>
                         </StackLayout>
                     </StackLayout>
                 </Frame>
