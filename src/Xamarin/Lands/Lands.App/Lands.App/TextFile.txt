@@ -1,0 +1,9 @@
+﻿LAPASUSCAVM\MSSQL19DEV
+LandsCV
+LandsCVAPP
+C01t@DKaHEw$5GNX
+-------------------------------------------------------------------------
+https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/controls/views
+https://help.syncfusion.com/xamarin/introduction/overview
+
+-------------------------------------------------------------------------
