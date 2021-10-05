@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using WebApiDepartamentos.Models;
 using Newtonsoft.Json;
 using System.Net;
+using WebApiDepartamentos.Configs;
+using Microsoft.Extensions.Options;
 
 namespace WebApiDepartamentos.Controllers
 {
@@ -15,10 +17,12 @@ namespace WebApiDepartamentos.Controllers
     public class DepartamentosController : ControllerBase
     {
         private readonly DepartamentoRepositorio departamentoRepositorio;
+        private readonly UrlApi cfg_urlapi;
 
-        public DepartamentosController(DepartamentoRepositorio departamentoRepositorio)
+        public DepartamentosController(DepartamentoRepositorio departamentoRepositorio, IOptions<UrlApi> cfg_urlapi)
         {
             this.departamentoRepositorio = departamentoRepositorio;
+            this.cfg_urlapi = cfg_urlapi.Value;
         }
 
         [HttpGet]
@@ -35,7 +39,7 @@ namespace WebApiDepartamentos.Controllers
             if (departamento == null)
                 return NotFound();
 
-            string url = "http://localhost:20211/api/Empleados";
+            string url = cfg_urlapi.Empleados;
             var _json = new WebClient().DownloadString(url);
             dynamic jsonDes = JsonConvert.DeserializeObject(_json);
             Console.WriteLine(_json);

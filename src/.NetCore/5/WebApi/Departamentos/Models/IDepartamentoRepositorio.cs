@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebApiDepartamentos.Models
 {
-    interface IDepartamentoRepositorio : IRepositorio<Departamento>
+    public interface IDepartamentoRepositorio : IRepositorio<Departamento>
     {
         void Go(Departamento departamento);
     }

@@ -1,0 +1,54 @@
+﻿@model AIC.Tools.Domain.DTO.AxieDetailDTO
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Main row -->
+<div class="row">
+    <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <!-- box-header -->
+            <div class="box-header with-border">
+                <h3 class="box-title">AIC / Tools</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form asp-action="AxiesDetailsPVP" enctype="multipart/form-data" method="post">
+                <!-- /.box-body -->
+                <div class="box-body">
+                    <!-- Línea # 1 de Controles -->
+                    <div class="row">
+                        <!-- Axie Id 1 -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID # 1</label>
+                            <input type="text" class="form-control txtAxieId1" placeholder="Escribir el ID del Axie # 1..." id="axieId1" asp-for="axieId1">
+                        </div>
+                        <!-- Axie Id 2 -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID # 2</label>
+                            <input type="text" class="form-control txtAxieId2" placeholder="Escribir el ID del Axie # 2..." id="axieId2" asp-for="axieId2">
+                        </div>
+                        <!-- Axie Id 3 -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID # 3</label>
+                            <input type="text" class="form-control txtAxieId3" placeholder="Escribir el ID del Axie # 3..." id="axieId3" asp-for="axieId3">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <input type="submit" value="Consultar Axie(s)" class="btn btn-info btn-sm" id="btnConsultar" />
+                </div>
+            </form>
+            <!-- /.form start -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+<!-- /.row (main row) -->

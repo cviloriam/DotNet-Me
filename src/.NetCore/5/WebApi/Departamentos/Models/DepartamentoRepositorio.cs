@@ -9,6 +9,7 @@ namespace WebApiDepartamentos.Models
     {
         public DepartamentoRepositorio(ApplicationDbContext context) : base(context)
         {
+            //Do Something
         }
 
         public void Go(Departamento departamento)

@@ -1,0 +1,306 @@
+﻿@model AIC.Tools.Domain.DTO.AxieDetailDTO
+@{
+    ViewData["Title"] = "Axies Details PVP";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Axies Details for PVP</h1>
+</div>
+
+<!-- Main row -->
+<div class="row">
+    <div class="col-md-8">
+        <!-- general form elements -->
+        <div class="box box-primary">
+            <!-- box-header -->
+            <div class="box-header with-border">
+                <h3 class="box-title">AIC / Tools</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form asp-action="AxiesDetailsPVP" enctype="multipart/form-data" method="post">
+                <!-- /.box-body -->
+                <div class="box-body">
+                    <!-- Línea # 1 de Controles -->
+                    <div class="row">
+                        <!-- Axie Id 1 -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID # 1</label>
+                            <input type="text" class="form-control txtAxieId1" placeholder="Escribir el ID del Axie # 1..." id="axieId1" asp-for="axieId1">
+                        </div>
+                        <!-- Axie Id 2 -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID # 2</label>
+                            <input type="text" class="form-control txtAxieId2" placeholder="Escribir el ID del Axie # 2..." id="axieId2" asp-for="axieId2">
+                        </div>
+                        <!-- Axie Id 3 -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID # 3</label>
+                            <input type="text" class="form-control txtAxieId3" placeholder="Escribir el ID del Axie # 3..." id="axieId3" asp-for="axieId3">
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <input type="submit" value="Consultar Axie(s)" class="btn btn-info btn-sm" id="btnConsultar" />
+                </div>
+                <br/>
+                <!-- /.box-body results details-->
+                <div class="box-body">
+                    <!-- Línea # 1 de Controles -->
+                    <div class="row">
+
+                        <!-- Axie Id 1 Result -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID #1 = @Model.AxiesDetails[0].data.axie.id</label>
+                            <center>
+                                <a href="https://marketplace.axieinfinity.com/axie/@Model.AxiesDetails[0].data.axie.id" target="_blank">
+                                <img src="@Url.Content(Model.AxiesDetails[0].data.axie.image)" alt="ImgAxie1" width="260" height="200" />
+                                </a>
+                            </center>
+                            <br />
+                            class: @Model.AxiesDetails[0].data.axie.Class
+                            <br />
+                            hp:@Model.AxiesDetails[0].data.axie.stats.hp / 
+                            sp:@Model.AxiesDetails[0].data.axie.stats.speed / 
+                            kl:@Model.AxiesDetails[0].data.axie.stats.skill / 
+                            mr:@Model.AxiesDetails[0].data.axie.stats.morale
+                            <br />
+                            <div class="table-responsive box-body">
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[0].data.axie.parts[2].abilities[0].backgroundUrl)" alt="ImgBackAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[2].id
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[2].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[2].abilities[0].energy ,
+                                                @Model.AxiesDetails[0].data.axie.parts[2].abilities[0].attack ,
+                                                @Model.AxiesDetails[0].data.axie.parts[2].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[2].abilities[0].description
+                                            </td>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[0].data.axie.parts[3].abilities[0].backgroundUrl)" alt="ImgMouthAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[3].id
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[3].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[3].abilities[0].energy ,
+                                                @Model.AxiesDetails[0].data.axie.parts[3].abilities[0].attack ,
+                                                @Model.AxiesDetails[0].data.axie.parts[3].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[3].abilities[0].description
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[0].data.axie.parts[4].abilities[0].backgroundUrl)" alt="ImgHornAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[4].id
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[4].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[4].abilities[0].energy ,
+                                                @Model.AxiesDetails[0].data.axie.parts[4].abilities[0].attack ,
+                                                @Model.AxiesDetails[0].data.axie.parts[4].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[4].abilities[0].description
+                                            </td>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[0].data.axie.parts[5].abilities[0].backgroundUrl)" alt="ImgTailAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[5].id
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[5].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[5].abilities[0].energy ,
+                                                @Model.AxiesDetails[0].data.axie.parts[5].abilities[0].attack ,
+                                                @Model.AxiesDetails[0].data.axie.parts[5].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[0].data.axie.parts[5].abilities[0].description
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Axie Id 2 Result -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID #2 = @Model.AxiesDetails[1].data.axie.id</label>
+                            <center>
+                                <a href="https://marketplace.axieinfinity.com/axie/@Model.AxiesDetails[1].data.axie.id" target="_blank">
+                                    <img src="@Url.Content(Model.AxiesDetails[1].data.axie.image)" alt="ImgAxie2" width="260" height="200" />
+                                </a>
+                            </center>
+                            <br />
+                            class: @Model.AxiesDetails[1].data.axie.Class
+                            <br />
+                            hp:@Model.AxiesDetails[1].data.axie.stats.hp /
+                            sp:@Model.AxiesDetails[1].data.axie.stats.speed /
+                            kl:@Model.AxiesDetails[1].data.axie.stats.skill /
+                            mr:@Model.AxiesDetails[1].data.axie.stats.morale
+                            <br />
+                            <div class="table-responsive box-body">
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[1].data.axie.parts[2].abilities[0].backgroundUrl)" alt="ImgBackAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[2].id
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[2].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[2].abilities[0].energy ,
+                                                @Model.AxiesDetails[1].data.axie.parts[2].abilities[0].attack ,
+                                                @Model.AxiesDetails[1].data.axie.parts[2].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[2].abilities[0].description
+                                            </td>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[1].data.axie.parts[3].abilities[0].backgroundUrl)" alt="ImgMouthAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[3].id
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[3].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[3].abilities[0].energy ,
+                                                @Model.AxiesDetails[1].data.axie.parts[3].abilities[0].attack ,
+                                                @Model.AxiesDetails[1].data.axie.parts[3].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[3].abilities[0].description
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[1].data.axie.parts[4].abilities[0].backgroundUrl)" alt="ImgHornAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[4].id
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[4].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[4].abilities[0].energy ,
+                                                @Model.AxiesDetails[1].data.axie.parts[4].abilities[0].attack ,
+                                                @Model.AxiesDetails[1].data.axie.parts[4].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[4].abilities[0].description
+                                            </td>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[1].data.axie.parts[5].abilities[0].backgroundUrl)" alt="ImgTailAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[5].id
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[5].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[5].abilities[0].energy ,
+                                                @Model.AxiesDetails[1].data.axie.parts[5].abilities[0].attack ,
+                                                @Model.AxiesDetails[1].data.axie.parts[5].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[1].data.axie.parts[5].abilities[0].description
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Axie Id 3 Result -->
+                        <div class="form-group col-md-4">
+                            <label>Axie ID #3 = @Model.AxiesDetails[2].data.axie.id</label>
+                            <center>
+                                <a href="https://marketplace.axieinfinity.com/axie/@Model.AxiesDetails[2].data.axie.id" target="_blank">
+                                    <img src="@Url.Content(Model.AxiesDetails[2].data.axie.image)" alt="ImgAxie3" width="260" height="200" />
+                                </a>
+                            </center>
+                            <br />
+                            class: @Model.AxiesDetails[2].data.axie.Class
+                            <br />
+                            hp:@Model.AxiesDetails[2].data.axie.stats.hp /
+                            sp:@Model.AxiesDetails[2].data.axie.stats.speed /
+                            kl:@Model.AxiesDetails[2].data.axie.stats.skill /
+                            mr:@Model.AxiesDetails[2].data.axie.stats.morale
+                            <br />
+                            <div class="table-responsive box-body">
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[2].data.axie.parts[2].abilities[0].backgroundUrl)" alt="ImgBackAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[2].id
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[2].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[2].abilities[0].energy ,
+                                                @Model.AxiesDetails[2].data.axie.parts[2].abilities[0].attack ,
+                                                @Model.AxiesDetails[2].data.axie.parts[2].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[2].abilities[0].description
+                                            </td>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[2].data.axie.parts[3].abilities[0].backgroundUrl)" alt="ImgMouthAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[3].id
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[3].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[3].abilities[0].energy ,
+                                                @Model.AxiesDetails[2].data.axie.parts[3].abilities[0].attack ,
+                                                @Model.AxiesDetails[2].data.axie.parts[3].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[3].abilities[0].description
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[2].data.axie.parts[4].abilities[0].backgroundUrl)" alt="ImgHornAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[4].id
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[4].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[4].abilities[0].energy ,
+                                                @Model.AxiesDetails[2].data.axie.parts[4].abilities[0].attack ,
+                                                @Model.AxiesDetails[2].data.axie.parts[4].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[4].abilities[0].description
+                                            </td>
+                                            <td class="nr">
+                                                <img src="@Url.Content(Model.AxiesDetails[2].data.axie.parts[5].abilities[0].backgroundUrl)" alt="ImgTailAxie1" width="80" height="100" />
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[5].id
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[5].abilities[0].name
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[5].abilities[0].energy ,
+                                                @Model.AxiesDetails[2].data.axie.parts[5].abilities[0].attack ,
+                                                @Model.AxiesDetails[2].data.axie.parts[5].abilities[0].defense
+                                                <br />
+                                                @Model.AxiesDetails[2].data.axie.parts[5].abilities[0].description
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /.form start -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+<!-- /.row (main row) -->

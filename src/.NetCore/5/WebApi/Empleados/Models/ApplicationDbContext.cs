@@ -2,8 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
-
 namespace WebApiEmpleados.Models
 {
     public partial class ApplicationDbContext : DbContext

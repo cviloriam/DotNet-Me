@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace WebApiEmpleados.Models
 {
     public partial class TipoDocumento
@@ -14,7 +12,6 @@ namespace WebApiEmpleados.Models
 
         public int Id { get; set; }
         public string NombreTipoDoc { get; set; }
-
         public virtual ICollection<Empleado> Empleados { get; set; }
     }
 }

@@ -30,14 +30,12 @@ namespace WebApiEmpleados.Controllers
         public ActionResult<Empleado> Get(int id) 
         {
             var empleado = context.Empleados.FirstOrDefault(x => x.Id == id);
-            //var empleado = context.Empleados.Include(x => x.TipoDocumento).FirstOrDefault(x => x.Id == id);
 
             if (empleado == null)
                 return NotFound();
 
             return empleado;
         }
-
 
         [HttpPost]
         public ActionResult Post([FromBody] Empleado empleado)
@@ -50,18 +48,18 @@ namespace WebApiEmpleados.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Empleado empleado)
         {
-            if (id != empleado.Id)
-                return BadRequest();
+            //if (id != empleado.Id)
+            //    return BadRequest();
 
+            empleado.Id = id;
             context.Entry(empleado).State = EntityState.Modified;
             context.SaveChanges();
 
             return Ok();
-
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<Empleado> Delete (int id)
+        public ActionResult<Empleado> DeleteWithObjectReturn (int id)
         {
             var empleado = context.Empleados.FirstOrDefault(x => x.Id == id);
 
@@ -72,6 +70,20 @@ namespace WebApiEmpleados.Controllers
             context.SaveChanges();
 
             return empleado;
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete (int id)
+        {
+            var empleado = context.Empleados.FirstOrDefault(x => x.Id == id);
+
+            if (empleado == null)
+                return NotFound();
+
+            context.Empleados.Remove(empleado);
+            context.SaveChanges();
+
+            return Ok();
         }
     }
 }
