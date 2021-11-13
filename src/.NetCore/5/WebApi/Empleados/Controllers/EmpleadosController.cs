@@ -48,8 +48,8 @@ namespace WebApiEmpleados.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Empleado empleado)
         {
-            //if (id != empleado.Id)
-            //    return BadRequest();
+            if (id != empleado.Id)
+                return BadRequest();
 
             empleado.Id = id;
             context.Entry(empleado).State = EntityState.Modified;
