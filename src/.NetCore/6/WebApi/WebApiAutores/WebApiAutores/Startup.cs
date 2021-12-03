@@ -1,4 +1,11 @@
-﻿namespace WebApiAutores;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
+using WebApiAutores.Filters;
+using WebApiAutores.Middlewares;
+using WebApiAutores.Services;
+
+namespace WebApiAutores;
 
 public class Startup
 {
@@ -11,15 +18,35 @@ public class Startup
     public void ConfigureServices(IServiceCollection services) 
     {
 
-        services.AddControllers();
+        services.AddControllers(opciones => {
+            opciones.Filters.Add(typeof(MiFiltroExcepcion));
+        }).AddJsonOptions(x => 
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+        services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
+
+        services.AddTransient<IService, ServiceA>();
+        services.AddTransient<ServiceTransiet>();
+        services.AddScoped<ServiceScoped>();
+        services.AddSingleton<ServiceSingleton>();
+        services.AddTransient<MiFiltroAccion>();
+        services.AddHostedService<EscribirEnArchivo>();
+
+        services.AddResponseCaching();
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new() { Title = "WebApiAutores", Version = "v1" });
         });
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger) 
     {
+        app.UseRespuestaHTTPLog();
+
         if (env.IsDevelopment()) 
         {
             app.UseDeveloperExceptionPage();
@@ -30,6 +57,8 @@ public class Startup
         app.UseHttpsRedirection();
 
         app.UseRouting();
+
+        app.UseResponseCaching();
 
         app.UseAuthorization();
 
