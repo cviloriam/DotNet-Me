@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using WebApiAutores.Entities;
-using WebApiAutores.Filters;
-using WebApiAutores.Services;
 
 namespace WebApiAutores.Controllers
 {
@@ -12,70 +9,18 @@ namespace WebApiAutores.Controllers
     public class AutoresController : ControllerBase
     {
         private readonly ApplicationDbContext context;
-        private readonly IService service;
-        private readonly ILogger<AutoresController> logger;
-        private readonly ServiceTransiet serviceTransiet;
-        private readonly ServiceScoped serviceScoped;
-        private readonly ServiceSingleton serviceSingleton;
-
-        public AutoresController(ApplicationDbContext context,
-            IService service, ILogger<AutoresController> logger,
-            ServiceTransiet serviceTransiet, ServiceScoped serviceScoped, ServiceSingleton serviceSingleton)
+        
+        public AutoresController(ApplicationDbContext context)
         {
             this.context = context;
-            this.service = service;
-            this.logger = logger;
-            this.serviceTransiet = serviceTransiet;
-            this.serviceScoped = serviceScoped;
-            this.serviceSingleton = serviceSingleton;
         }
-
-        [HttpGet("GUID")]
-        [ServiceFilter(typeof(MiFiltroAccion))]
-        public ActionResult ObtenerGuids() 
-        {
-            return Ok(new {
-                AutoresController_Transiet = serviceTransiet.Guid,
-                ServiceA_Transiet = service.ObtenerTransiet(),
-                AutoresController_Scoped = serviceScoped.Guid,
-                ServiceA_Scoped = service.ObtenerScoped(),
-                AutoresController_Singleton = serviceSingleton.Guid,
-                ServiceA_Singleton = service.ObtenerSingleton()
-            });
-        }
-
+                
         [HttpGet] // api/autores
-        [HttpGet("listado")] // api/autores/listado
-        [HttpGet("/listado")] // listado
-        [ResponseCache(Duration = 20)] // Guarda en Caché los resultados de este método por 20 segundos
-        [ServiceFilter(typeof(MiFiltroAccion))]
         public async Task<ActionResult<List<Autor>>> Get()
         {
-            try
-            {
-                logger.LogInformation("Obteniendo los autores.");
-                logger.LogWarning("Listado de autores.");
-                logger.LogDebug("Debugeando listado de autores.");
-                return await context.Autores.Include(x => x.Libros).ToListAsync();
-            }
-            catch (Exception)
-            {
-                throw new NotImplementedException();
-            }
+            return await context.Autores.ToListAsync();            
         }
-
-        [HttpGet("primero")] // api/autores/primero?nombre=nombre
-        public async Task<ActionResult<Autor>> PrimerAutor([FromHeader] int valor, [FromQuery] string nombre)
-        {
-            return await context.Autores.FirstOrDefaultAsync();
-        }
-        
-        [HttpGet("segundo")] // api/autores/segundo
-        public ActionResult<Autor> SegundoAutor() 
-        {
-            return new Autor() { Id = 1, Name = "Autor en Memoria" };
-        }
-
+                
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Autor>> Get(int id)
         {
@@ -90,7 +35,7 @@ namespace WebApiAutores.Controllers
         [HttpGet("{nombre}")]
         public async Task<ActionResult<Autor>> Get(string nombre)
         {
-            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Name.Contains(nombre));
+            var autor = await context.Autores.FirstOrDefaultAsync(x => x.Titulo.Contains(nombre));
 
             if (autor == null)
                 return BadRequest();
@@ -112,10 +57,10 @@ namespace WebApiAutores.Controllers
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Autor autor)
         {
-            var existeAutorMismoNombre = await context.Autores.AnyAsync(x => x.Name == autor.Name);
+            var existeAutorMismoNombre = await context.Autores.AnyAsync(x => x.Titulo == autor.Titulo);
 
             if (existeAutorMismoNombre)
-                return BadRequest($"Ya existe un autor con el mismo nombre : {autor.Name}");
+                return BadRequest($"Ya existe un autor con el mismo nombre : {autor.Titulo}");
 
             context.Add(autor);
             await context.SaveChangesAsync();

@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Logging;
 using WebApiAutores.Controllers;
-using WebApiAutores.Services;
 
 namespace WebApiAutores;
 

@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using WebApiAutores.Filters;
 using WebApiAutores.Middlewares;
-using WebApiAutores.Services;
 
 namespace WebApiAutores;
 
@@ -25,15 +24,6 @@ public class Startup
 
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
-
-        services.AddTransient<IService, ServiceA>();
-        services.AddTransient<ServiceTransiet>();
-        services.AddScoped<ServiceScoped>();
-        services.AddSingleton<ServiceSingleton>();
-        services.AddTransient<MiFiltroAccion>();
-        services.AddHostedService<EscribirEnArchivo>();
-
-        services.AddResponseCaching();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 
