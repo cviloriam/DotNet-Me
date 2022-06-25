@@ -1,9 +1,12 @@
+using Microsoft.Extensions.Logging;
+using WebApiAutores.Controllers;
+
 namespace WebApiAutores;
 
 public class Program 
 {
     public static void Main(string[] args) 
-    {
+    {       
         CreateHostBuilder(args).Build().Run();
     }
 
